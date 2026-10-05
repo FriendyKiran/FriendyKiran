@@ -1,28 +1,15 @@
 {
-  "name": "github-profile-agent-console",
-  "version": "1.0.0",
+  "name": "friendykiran-profile",
+  "version": "2.0.0",
   "private": true,
-  "description": "An animated GitHub Profile README starter kit with an ASCII portrait and AI-assisted setup.",
+  "description": "Animated, self-generated GitHub profile README for Kiran Babu Athina.",
   "type": "module",
-  "engines": {
-    "node": ">=20"
-  },
+  "engines": { "node": ">=20" },
   "scripts": {
-    "setup": "node scripts/setup.mjs",
-    "generate": "node scripts/generate.mjs",
-    "generate:hero": "node scripts/generate-hero.mjs",
-    "generate:readme": "node scripts/generate-readme.mjs",
-    "activity": "node scripts/update-activity.mjs",
-    "validate": "node scripts/validate.mjs",
-    "check": "npm run validate"
+    "build": "node scripts/build.mjs",
+    "smi": "node scripts/smi.mjs",
+    "check": "node scripts/check.mjs"
   },
-  "keywords": [
-    "github-profile",
-    "readme",
-    "ascii-art",
-    "svg-animation",
-    "developer-portfolio"
-  ],
   "license": "MIT",
   "dependencies": {
     "sharp": "^0.34.5"

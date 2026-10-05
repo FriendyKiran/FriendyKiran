@@ -1,0 +1,146 @@
+{
+  "profile": {
+    "name": "Kiran Babu Athina",
+    "username": "FriendyKiran",
+    "headline": "Machine Learning & AI Engineer",
+    "tagline": "M.S. Data Science @ Texas A&M · Research Assistant, AISLS Lab · College Station, TX",
+    "status": "open to ML Engineer · AI Engineer · Data Scientist roles"
+  },
+  "links": [
+    { "label": "Portfolio", "url": "https://kiranbabuathina.com", "logo": "googlechrome", "color": "00D4FF" },
+    { "label": "LinkedIn", "url": "https://www.linkedin.com/in/athinakiranbabu", "logo": "linkedin", "color": "0A66C2" },
+    { "label": "Google Scholar", "url": "https://scholar.google.com/citations?user=wWen3jgAAAAJ&hl=en", "logo": "googlescholar", "color": "4285F4" },
+    { "label": "Email", "url": "mailto:kiranathina8@gmail.com", "logo": "gmail", "color": "EA4335" }
+  ],
+  "hero": {
+    "prompt": "kiran.generate(\"what do you build?\")",
+    "output": [
+      { "text": "agentic RAG over knowledge graphs", "metric": "98.7% Recall@5" },
+      { "text": "LoRA fine-tunes of Gemma & LLaMA on local GPUs" },
+      { "text": "vision-language models for retinal diagnosis", "metric": "91% acc" },
+      { "text": "PySpark pipelines moving 100M+ records/day" },
+      { "text": "...and every model ships with an eval set." }
+    ]
+  },
+  "highlights": [
+    { "value": "4+ yrs", "label": "shipping production ML" },
+    { "value": "98.7%", "label": "Recall@5, agentic KG-RAG" },
+    { "value": "100M+", "label": "records/day via PySpark" },
+    { "value": "3.9", "label": "GPA, M.S. Data Science" }
+  ],
+  "evals": [
+    { "label": "Recall@5", "value": "98.7%" },
+    { "label": "Hit@5", "value": "95.0%" },
+    { "label": "MRR", "value": "0.925" },
+    { "label": "src recall", "value": "95%" },
+    { "label": "src precision", "value": "86%" }
+  ],
+  "projects": [
+    {
+      "id": "kg-rag",
+      "name": "Agentic RAG over KGs",
+      "domain": "Research · TAMU AISLS",
+      "summary": "Query-routing layer that sends each question to one of 3 fine-tuned knowledge-graph retrievers, running on TAMU HPC (2× RTX 6000).",
+      "metric": "98.7%",
+      "metricLabel": "Recall@5",
+      "gauge": 98.7,
+      "stack": ["Agentic AI", "Knowledge Graphs", "LoRA"],
+      "url": "https://kiranbabuathina.com/#projects"
+    },
+    {
+      "id": "azure-rag",
+      "name": "Source-Grounded RAG",
+      "domain": "Research · Azure",
+      "summary": "FastAPI backend + React chat indexing 120,000+ chunks with hybrid BM25 + FAISS retrieval and top-5 source traceability on every answer.",
+      "metric": "95%",
+      "metricLabel": "Hit@5 · MRR 0.925",
+      "gauge": 95,
+      "stack": ["FastAPI", "FAISS", "React", "Azure"],
+      "url": "https://kiranbabuathina.com/#projects"
+    },
+    {
+      "id": "retinal-vlm",
+      "name": "Retinal Disease VLM",
+      "domain": "Healthcare AI",
+      "summary": "Fine-tuned MedGemma 4B on paired fundus images and clinical notes, validated on 1,200+ expert-annotated images across 12 retinal diseases.",
+      "metric": "91%",
+      "metricLabel": "diagnostic accuracy",
+      "gauge": 91,
+      "stack": ["MedGemma 4B", "VLMs", "Fine-tuning"],
+      "url": "https://kiranbabuathina.com/#projects"
+    },
+    {
+      "id": "exoplanet",
+      "name": "Exoplanet Discovery",
+      "domain": "NASA Space Apps 2025",
+      "summary": "Ensemble of RF, XGBoost, LightGBM, Gradient Boosting, and MLP that classifies Kepler + TESS objects, served as a Streamlit app.",
+      "metric": "96.6%",
+      "metricLabel": "classification acc",
+      "gauge": 96.64,
+      "stack": ["XGBoost", "LightGBM", "Streamlit"],
+      "url": "https://github.com/FriendyKiran/Exoplanet-Discovery-using-Machine-Learning",
+      "repo": true
+    },
+    {
+      "id": "clip",
+      "name": "CLIP-style Contrastive",
+      "domain": "Deep Learning",
+      "summary": "Dual-encoder ResNet-50 + DistilBERT trained with NT-Xent and iSogCLR losses, benchmarked against baseline CLIP (+14% zero-shot on ImageNet).",
+      "metric": "+17%",
+      "metricLabel": "MSCOCO retrieval",
+      "stack": ["PyTorch", "ResNet-50", "DistilBERT"],
+      "url": "https://kiranbabuathina.com/#projects"
+    },
+    {
+      "id": "livestock-twin",
+      "name": "Livestock Digital Twin",
+      "domain": "Research · Animal Science",
+      "summary": "Agent-based simulation fed by live MQTT sensor streams, tracking per-animal energy by the minute and forecasting monthly methane.",
+      "metric": "1 min",
+      "metricLabel": "per-animal resolution",
+      "stack": ["Python", "Mesa ABM", "MQTT"],
+      "url": "https://kiranbabuathina.com/#projects"
+    }
+  ],
+  "career": [
+    { "year": 2017.6, "tag": "init()", "title": "B.Tech ECE · GVP", "detail": "first class with distinction" },
+    { "year": 2021.4, "tag": "epoch 1", "title": "ML Intern · TCS", "detail": "98.5% KYC fraud accuracy", "spike": true },
+    { "year": 2022.3, "tag": "epoch 2", "title": "ML Engineer · TCS", "detail": "100M+ records/day · −30% loan time" },
+    { "year": 2023.65, "tag": "new dataset", "title": "M.S. Data Science · TAMU", "detail": "3.9 GPA · LLaMA 3 LoRA as GRA", "spike": true },
+    { "year": 2025.45, "tag": "epoch 4", "title": "Research Assistant · AISLS", "detail": "agentic KG-RAG · 98.7% Recall@5", "spike": true },
+    { "year": 2026.75, "tag": "next checkpoint", "title": "your team?", "detail": "open to ML / AI roles" }
+  ],
+  "modelCard": {
+    "model_id": "FriendyKiran/kiran-babu-athina",
+    "pipeline_tag": "machine-learning-engineering",
+    "base_model": "B.Tech ECE (GVP, 2021)",
+    "fine_tuned_on": ["telecom", "finance", "healthcare", "agricultural research"],
+    "training": {
+      "industry": "Tata Consultancy Services, 2021–2023",
+      "graduate": "M.S. Data Science, Texas A&M (3.9 GPA)",
+      "current": "Research Assistant, Texas A&M AISLS Lab"
+    },
+    "intended_use": ["agentic RAG systems", "LLM fine-tuning (LoRA / QLoRA / PEFT)", "multimodal + vision-language models", "production ML pipelines"],
+    "eval_policy": "no model ships without a held-out eval set and a baseline to beat",
+    "limitations": "will ask for your eval set before your roadmap",
+    "license": "open to opportunities"
+  },
+  "requirements": [
+    { "group": "languages", "items": ["python", "sql", "javascript", "r"] },
+    { "group": "llm + rag", "items": ["transformers", "peft", "langchain", "langgraph", "faiss-cpu", "rank-bm25"] },
+    { "group": "modeling", "items": ["torch", "tensorflow", "scikit-learn", "xgboost", "lightgbm"] },
+    { "group": "serving + apps", "items": ["fastapi", "streamlit", "react"] },
+    { "group": "data + infra", "items": ["pyspark", "hadoop", "postgresql", "mongodb", "redis", "docker", "kubernetes"] },
+    { "group": "cloud", "items": ["azure-openai", "azure-ai-search", "azure-ml", "aws-sagemaker", "aws-ec2"] }
+  ],
+  "publications": [
+    {
+      "year": "2025",
+      "title": "An agent-based framework of cattle value discovery system for precision nutrient requirements and utilization prediction of beef cattle",
+      "authors": "K. Kaniyamattam, V. Kulangara-Veettil, P. Kundu, K. B. Athina, L. O. Tedeschi",
+      "venue": "CABI Digital Library · Vol. 16, Issue 3, p. 449",
+      "url": "https://www.cabidigitallibrary.org/doi/full/10.5555/20250456444"
+    }
+  ],
+  "certifications": ["NVIDIA DLI Certified", "Generative AI Fundamentals", "PCAP: Python", "CCNA: Introduction to Networks"]
+}

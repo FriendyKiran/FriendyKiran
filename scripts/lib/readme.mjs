@@ -1,169 +1,106 @@
-import { readFile, writeFile } from "node:fs/promises";
-import { resolve } from "node:path";
+const badge = (link) => {
+  const label = encodeURIComponent(link.label.replaceAll("-", "--").replaceAll(" ", "_"));
+  return `<a href="${link.url}"><img alt="${link.label}" src="https://img.shields.io/badge/${label}-${link.color}?style=flat-square&logo=${link.logo}&logoColor=white"></a>`;
+};
 
-export const ACTIVITY_START = "<!-- AUTO:ACTIVITY:START -->";
-export const ACTIVITY_END = "<!-- AUTO:ACTIVITY:END -->";
+// A <picture> that follows the viewer's GitHub theme.
+const themed = (base, alt, width = "100%") => `<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="./assets/${base}-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="./assets/${base}-light.svg">
+  <img src="./assets/${base}-dark.svg" alt="${alt}" width="${width}">
+</picture>`;
 
-function escapeCell(value) {
-  return String(value).replaceAll("|", "\\|").replaceAll("\n", " ");
-}
-
-function badgeSegment(value) {
-  return encodeURIComponent(String(value).replaceAll("-", "--").replaceAll("_", "__").replaceAll(" ", "_"));
-}
-
-function renderLinks(links) {
-  return links.map((link) => {
-    const logo = link.logo ? `&logo=${encodeURIComponent(link.logo)}&logoColor=white` : "";
-    const image = `https://img.shields.io/badge/${badgeSegment(link.label)}-${badgeSegment(link.value)}-${link.color}?style=for-the-badge${logo}`;
-    return `  <a href="${link.url}"><img alt="${link.label}" src="${image}"></a>`;
-  }).join("\n");
-}
-
-function renderFocus(focus) {
-  return [
-    "| Area | What I am exploring |",
-    "| --- | --- |",
-    ...focus.map((item) => `| **${escapeCell(item.name)}** | ${escapeCell(item.description)} |`)
-  ].join("\n");
-}
-
-function renderProjects(projects) {
-  return [
-    "| Project | Focus | Why it matters |",
-    "| --- | --- | --- |",
-    ...projects.map((project) => {
-      const homepage = project.homepage ? ` [Live](${project.homepage})` : "";
-      return `| [**${escapeCell(project.name)}**](${project.url}) | ${escapeCell(project.focus)} | ${escapeCell(project.summary)}${homepage} |`;
+function yaml(value, indent = 0) {
+  const sp = " ".repeat(indent);
+  return Object.entries(value)
+    .map(([key, v]) => {
+      if (Array.isArray(v)) return `${sp}${key}:\n${v.map((item) => `${sp}  - ${item}`).join("\n")}`;
+      if (v && typeof v === "object") return `${sp}${key}:\n${yaml(v, indent + 2)}`;
+      return `${sp}${key}: ${v}`;
     })
-  ].join("\n");
+    .join("\n");
 }
 
-function renderTyping(config) {
-  if (!config.typing?.length) return "";
-  const params = new URLSearchParams({
-    font: "Fira Code",
-    weight: "600",
-    size: "22",
-    duration: "2800",
-    pause: "900",
-    color: "22D3EE",
-    center: "true",
-    vCenter: "true",
-    width: "620",
-    height: "50",
-    lines: config.typing.join(";")
-  });
-  const src = `https://readme-typing-svg.demolab.com?${params.toString().replaceAll("+", "%20")}`;
-  return `\n<p align="center">\n  <img src="${src}" alt="${escapeCell(config.typing.join(" "))}">\n</p>\n`;
+function requirements(groups) {
+  return groups.map((g) => `# ${g.group}\n${g.items.join("  ")}`).join("\n\n");
 }
 
-function renderHighlights(highlights) {
-  if (!highlights?.length) return "";
-  const head = `| ${highlights.map((item) => `<h2>${item.value}</h2>`).join(" | ")} |`;
-  const divider = `| ${highlights.map(() => ":---:").join(" | ")} |`;
-  const body = `| ${highlights.map((item) => `<sub>${escapeCell(item.label)}</sub>`).join(" | ")} |`;
-  return `\n<div align="center">\n\n${head}\n${divider}\n${body}\n\n</div>\n`;
+function projectGrid(projects) {
+  const cells = projects.map(
+    (p) => `<td width="50%"><a href="${p.url}">${themed(`cards/${p.id}`, `${p.name}: ${p.metric} ${p.metricLabel}`)}</a></td>`
+  );
+  const rows = [];
+  for (let i = 0; i < cells.length; i += 2) rows.push(`<tr>\n${cells.slice(i, i + 2).join("\n")}\n</tr>`);
+  return `<table>\n${rows.join("\n")}\n</table>`;
 }
 
-function renderTechIcons(techIcons) {
-  if (!techIcons) return "";
-  return `<p align="center">\n  <img src="https://skillicons.dev/icons?i=${techIcons}&perline=15" alt="Tech icons">\n</p>\n\n`;
-}
+export function readme(config) {
+  const p = config.profile;
+  const pubs = config.publications
+    .map((pub) => `- **${pub.year}** · [${pub.title}](${pub.url})  \n  <sub>${pub.authors.replace("K. B. Athina", "**K. B. Athina**")} · _${pub.venue}_</sub>`)
+    .join("\n");
 
-function renderPublications(publications) {
-  if (!publications?.length) return "";
-  const items = publications.map((item) => {
-    const authors = item.authors ? `<br><sub>${item.authors}</sub>` : "";
-    return `- **${item.year}** · [${item.title}](${item.url})${authors}<br><sub>_${item.venue}_</sub>`;
-  });
-  return `\n## Publications\n\n${items.join("\n")}\n`;
-}
+  return `<!-- Generated from profile.json by scripts/build.mjs. Edit the JSON, not this file. -->
+<div align="center">
 
-function renderSnake(repository) {
-  const base = `https://raw.githubusercontent.com/${repository}/output`;
-  return `
-## Contribution Snake
+${themed("hero", `${p.name} — ${p.headline}. ${p.tagline}`)}
 
-<p align="center">
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="${base}/github-contribution-grid-snake-dark.svg">
-    <source media="(prefers-color-scheme: light)" srcset="${base}/github-contribution-grid-snake.svg">
-    <img alt="Contribution grid eaten by a snake" src="${base}/github-contribution-grid-snake-dark.svg">
-  </picture>
-</p>
+${config.links.map(badge).join(" ")}
+
+</div>
+
+### \`$ cat model_card.yaml\`
+
+\`\`\`yaml
+${yaml(config.modelCard)}
+\`\`\`
+
+### \`$ trace --request\` &nbsp;·&nbsp; how I build retrieval systems
+
+${themed("pipeline", "Animated RAG trace: query, agentic router, knowledge graph / BM25 / FAISS retrievers, rerank and cite, fine-tuned LLM, grounded answer, eval harness")}
+
+### \`$ ls ./models\` &nbsp;·&nbsp; selected work
+
+${projectGrid(config.projects)}
+
+<sub>Cards link to the code where it's public, otherwise to the case study on my <a href="https://kiranbabuathina.com/#projects">portfolio</a>.</sub>
+
+### \`>>> kiran.fit()\` &nbsp;·&nbsp; training log
+
+${themed("career", "Career as a loss curve from B.Tech in 2017 through TCS, Texas A&M, and the AISLS Lab, to the next role")}
+
+<details>
+<summary><b><code>$ cat requirements.txt</code></b> &nbsp;·&nbsp; tech stack</summary>
+
+\`\`\`python
+${requirements(config.requirements)}
+\`\`\`
+
+</details>
+
+<details>
+<summary><b><code>$ cat publications.bib</code></b> &nbsp;·&nbsp; research output</summary>
+
+${pubs}
+
+**Certifications:** ${config.certifications.join(" · ")}
+
+</details>
+
+### \`$ watch gh-smi\` &nbsp;·&nbsp; live telemetry
+
+${themed("smi", "nvidia-smi style panel with live GitHub stats: contributions, streak, repos, recent pushes, and languages")}
+
+<sub>Regenerated daily by a GitHub Action from the GitHub GraphQL API — no third-party stat cards.</sub>
+
+<div align="center">
+
+<br>
+
+**${p.status}** → [kiranathina8@gmail.com](mailto:kiranathina8@gmail.com)
+
+<sub><code>early_stopping=False</code></sub>
+
+</div>
 `;
-}
-
-function extractActivity(readme) {
-  const startIndex = readme.indexOf(ACTIVITY_START);
-  const endIndex = readme.indexOf(ACTIVITY_END);
-  if (startIndex === -1 || endIndex === -1 || endIndex <= startIndex) return null;
-  return readme.slice(startIndex + ACTIVITY_START.length, endIndex).trim();
-}
-
-async function readExistingActivity(readmePath) {
-  try {
-    const existing = await readFile(readmePath, "utf8");
-    return extractActivity(existing);
-  } catch (error) {
-    if (error.code === "ENOENT") return null;
-    throw error;
-  }
-}
-
-export async function generateProfileReadme({ config, manifest, readmePath }) {
-  const existingActivity = await readExistingActivity(readmePath);
-  const activity = existingActivity || "_Recent public activity will appear here after the workflow runs._";
-  const activitySection = config.activity.enabled
-    ? `\n## Recent Activity\n\n${ACTIVITY_START}\n${activity}\n${ACTIVITY_END}\n`
-    : "";
-  const techStack = config.techStack.map((item) => `\`${item}\``).join(" · ");
-  const about = config.profile.about.join("\n\n");
-
-  const readme = `<!-- Generated by GitHub Profile Agent Console. Edit profile.config.json, then run npm run generate. -->
-<p align="center">
-  <picture>
-    <source media="(max-width: 760px) and (prefers-color-scheme: dark)" srcset="./assets/hero/${manifest.assets.mobileDark}">
-    <source media="(max-width: 760px)" srcset="./assets/hero/${manifest.assets.mobileLight}">
-    <source media="(prefers-color-scheme: dark)" srcset="./assets/hero/${manifest.assets.desktopDark}">
-    <source media="(prefers-color-scheme: light)" srcset="./assets/hero/${manifest.assets.desktopLight}">
-    <img src="./assets/hero/${manifest.assets.desktopDark}" alt="${config.profile.name} - ${config.profile.headline}" width="100%">
-  </picture>
-</p>
-
-${renderTyping(config)}
-<p align="center">
-${renderLinks(config.links)}
-</p>
-${renderHighlights(config.highlights)}
-## About Me
-
-${about}
-
-## Current Focus
-
-${renderFocus(config.focus)}
-
-## Featured Work
-
-${renderProjects(config.projects)}
-
-## Research Direction
-
-${config.research.narrative}
-
-## Tech Stack
-
-${renderTechIcons(config.techIcons)}${techStack}
-${renderPublications(config.publications)}${activitySection}${renderSnake(config.repository ?? `${config.profile.username}/${config.profile.username}`)}
----
-
-<p align="center">
-  ${config.footer}
-</p>
-`;
-
-  await writeFile(resolve(readmePath), readme);
-  return readme;
 }
