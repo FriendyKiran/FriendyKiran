@@ -87,12 +87,6 @@ ${pubs}
 
 </details>
 
-### \`$ watch gh-smi\` &nbsp;·&nbsp; live telemetry
-
-${themed("smi", "nvidia-smi style panel with live GitHub stats: contributions, streak, repos, recent pushes, and languages")}
-
-<sub>Regenerated daily by a GitHub Action from the GitHub GraphQL API — no third-party stat cards.</sub>
-
 <div align="center">
 
 <br>

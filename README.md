@@ -130,16 +130,6 @@ azure-openai  azure-ai-search  azure-ml  aws-sagemaker  aws-ec2
 
 </details>
 
-### `$ watch gh-smi` &nbsp;·&nbsp; live telemetry
-
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="./assets/smi-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="./assets/smi-light.svg">
-  <img src="./assets/smi-dark.svg" alt="nvidia-smi style panel with live GitHub stats: contributions, streak, repos, recent pushes, and languages" width="100%">
-</picture>
-
-<sub>Regenerated daily by a GitHub Action from the GitHub GraphQL API — no third-party stat cards.</sub>
-
 <div align="center">
 
 <br>
