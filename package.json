@@ -4,11 +4,10 @@
   "private": true,
   "description": "Animated, self-generated GitHub profile README for Kiran Babu Athina.",
   "type": "module",
-  "engines": {
-    "node": ">=20"
-  },
+  "engines": { "node": ">=20" },
   "scripts": {
     "build": "node scripts/build.mjs",
+    "smi": "node scripts/smi.mjs",
     "check": "node scripts/check.mjs"
   },
   "license": "MIT",
