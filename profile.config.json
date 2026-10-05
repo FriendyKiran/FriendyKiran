@@ -12,7 +12,7 @@
       "Before that, at Tata Consultancy Services, I engineered PySpark pipelines, NLP classifiers, and multimodal QC models on Docker and Kubernetes. I don't call a model done until it has a held-out eval set, a baseline to beat, and a recommendation people can act on."
     ]
   },
-  "repository": "FriendyKiran/GitHub-Profile-Console",
+  "repository": "FriendyKiran/FriendyKiran",
   "research": {
     "primary": "Agentic RAG & LLMs",
     "direction": "Grounded, evaluated AI in production",
