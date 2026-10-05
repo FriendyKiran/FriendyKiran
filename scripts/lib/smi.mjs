@@ -102,7 +102,7 @@ export function smiSvg(config, stats, t, now = new Date()) {
     { text: row(" GPU  Name                Persistence-M ", " Bus-Id          Disp.A ", " Volatile Uncorr. ECC ") },
     { text: row(" Fan  Temp   Perf         Pwr:Usage/Cap ", "           Memory-Usage ", " GPU-Util  Compute M. ") },
     { text: sep("=", "|") },
-    { text: row(`   0  ${pad("KIRAN-RTX-6000", 19)}           On `, " 00000000:TAMU:00.0  On ", "  0 (hallucinations) ") , cls: "gpu" },
+    { text: row(`   0  ${pad("KIRAN-ML-ENGINEER", 19)}           On `, " 00000000:GH:00.0    On ", "  0 (hallucinations) ") , cls: "gpu" },
     { text: row(` ${pad(fan + "%", 4)} ${pad(stats.streak + "d", 6)} P0       ${pad(`${watts}W / 350W`, 15, true)} `, ` ${pad(`${stats.repoCount} / 100 repos`, 22, true)} `, ` ${pad(util + "%", 6, true)}     Default `), cls: "gpu" },
     { text: sep() },
     { text: "" },
@@ -175,7 +175,7 @@ text { font-family: ${MONO}; font-size: 13.5px; white-space: pre; }
 @keyframes grow { from { transform: scaleY(0); } to { transform: scaleY(1); } }`;
 
   const body = `<rect width="${width}" height="${height}" rx="18" fill="${t.bg}" stroke="${t.border}"/>
-<text x="${PAD}" y="34" fill="${t.muted}"><tspan fill="${t.green}">${esc(login.toLowerCase())}@tamu-hpc</tspan>:<tspan fill="${t.accent}">~</tspan>$ watch -n 86400 gh-smi</text>
+<text x="${PAD}" y="34" fill="${t.muted}"><tspan fill="${t.green}">${esc(login.toLowerCase())}@github</tspan>:<tspan fill="${t.accent}">~</tspan>$ watch -n 86400 gh-smi</text>
 ${text}
 <text x="${PAD}" y="${chartTop - 10}" font-size="12" fill="${t.text}">GPU-Util history · commits per week, last 52 weeks · ${stats.total} contributions · ${stats.stars}★ · ${stats.followers} follower${stats.followers === 1 ? "" : "s"}</text>
 ${bars}

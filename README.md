@@ -36,12 +36,12 @@ limitations: will ask for your eval set before your roadmap
 license: open to opportunities
 ```
 
-### `$ trace --request` &nbsp;·&nbsp; how I build retrieval systems
+### `neo4j$ MATCH (me)-[*]->(work)` &nbsp;·&nbsp; my work as a knowledge graph
 
 <picture>
-  <source media="(prefers-color-scheme: dark)" srcset="./assets/pipeline-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="./assets/pipeline-light.svg">
-  <img src="./assets/pipeline-dark.svg" alt="Animated RAG trace: query, agentic router, knowledge graph / BM25 / FAISS retrievers, rerank and cite, fine-tuned LLM, grounded answer, eval harness" width="100%">
+  <source media="(prefers-color-scheme: dark)" srcset="./assets/graph-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="./assets/graph-light.svg">
+  <img src="./assets/graph-dark.svg" alt="Knowledge graph: Kiran linked to four domains (LLMs and RAG, vision and multimodal, classical ML, data and MLOps), each linked to the work built in it and the tools it uses" width="100%">
 </picture>
 
 ### `$ ls ./models` &nbsp;·&nbsp; selected work
@@ -92,7 +92,7 @@ license: open to opportunities
 <picture>
   <source media="(prefers-color-scheme: dark)" srcset="./assets/career-dark.svg">
   <source media="(prefers-color-scheme: light)" srcset="./assets/career-light.svg">
-  <img src="./assets/career-dark.svg" alt="Career as a loss curve from B.Tech in 2017 through TCS, Texas A&M, and the AISLS Lab, to the next role" width="100%">
+  <img src="./assets/career-dark.svg" alt="Career as a rising validation-accuracy curve from B.Tech in 2017 through TCS, Texas A&M, and the AISLS Lab, to the next role" width="100%">
 </picture>
 
 <details>

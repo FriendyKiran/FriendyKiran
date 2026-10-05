@@ -115,7 +115,7 @@ function terminal(config, t) {
   const box = `<rect x="${x}" y="${y}" width="${w}" height="${height}" rx="12" fill="${t.surface}" stroke="${t.border}"/>
 <path d="M ${x} ${y + 30} H ${x + w}" stroke="${t.border}"/>
 <circle cx="${x + 18}" cy="${y + 15}" r="4.5" fill="#ef4444"/><circle cx="${x + 34}" cy="${y + 15}" r="4.5" fill="#f59e0b"/><circle cx="${x + 50}" cy="${y + 15}" r="4.5" fill="#22c55e"/>
-<text x="${x + w / 2}" y="${y + 19.5}" text-anchor="middle" class="mono" font-size="11.5" fill="${t.muted}">inference.py — ${esc(config.profile.username)}@tamu-hpc</text>
+<text x="${x + w / 2}" y="${y + 19.5}" text-anchor="middle" class="mono" font-size="11.5" fill="${t.muted}">inference.py — ${esc(config.profile.username.toLowerCase())}@github</text>
 <text x="${x + w - 16}" y="${y + 19.5}" text-anchor="end" class="mono" font-size="10.5" fill="${t.faint}">temp=0.2 · top_k=5</text>`;
 
   return { clips: clips.join(""), body: `${box}${rows.join("")}${cursor}`, bottom: y + height };

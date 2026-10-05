@@ -55,9 +55,9 @@ ${config.links.map(badge).join(" ")}
 ${yaml(config.modelCard)}
 \`\`\`
 
-### \`$ trace --request\` &nbsp;·&nbsp; how I build retrieval systems
+### \`neo4j$ MATCH (me)-[*]->(work)\` &nbsp;·&nbsp; my work as a knowledge graph
 
-${themed("pipeline", "Animated RAG trace: query, agentic router, knowledge graph / BM25 / FAISS retrievers, rerank and cite, fine-tuned LLM, grounded answer, eval harness")}
+${themed("graph", "Knowledge graph: Kiran linked to four domains (LLMs and RAG, vision and multimodal, classical ML, data and MLOps), each linked to the work built in it and the tools it uses")}
 
 ### \`$ ls ./models\` &nbsp;·&nbsp; selected work
 
@@ -67,7 +67,7 @@ ${projectGrid(config.projects)}
 
 ### \`>>> kiran.fit()\` &nbsp;·&nbsp; training log
 
-${themed("career", "Career as a loss curve from B.Tech in 2017 through TCS, Texas A&M, and the AISLS Lab, to the next role")}
+${themed("career", "Career as a rising validation-accuracy curve from B.Tech in 2017 through TCS, Texas A&M, and the AISLS Lab, to the next role")}
 
 <details>
 <summary><b><code>$ cat requirements.txt</code></b> &nbsp;·&nbsp; tech stack</summary>

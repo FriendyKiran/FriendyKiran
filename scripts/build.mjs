@@ -8,8 +8,8 @@ import { resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import { careerSvg } from "./lib/career.mjs";
 import { cardSvg } from "./lib/cards.mjs";
+import { graphSvg } from "./lib/graph.mjs";
 import { HERO_PORTRAIT_BOX, heroSvg, samplePortrait } from "./lib/hero.mjs";
-import { pipelineSvg } from "./lib/pipeline.mjs";
 import { readme } from "./lib/readme.mjs";
 import { themes } from "./lib/theme.mjs";
 
@@ -26,7 +26,7 @@ const portrait = portraitPath ? await samplePortrait(portraitPath, HERO_PORTRAIT
 
 for (const t of Object.values(themes)) {
   if (portrait) await write(`hero-${t.name}.svg`, heroSvg(config, portrait, t));
-  await write(`pipeline-${t.name}.svg`, pipelineSvg(config, t));
+  await write(`graph-${t.name}.svg`, graphSvg(config, t));
   await write(`career-${t.name}.svg`, careerSvg(config, t));
   for (const project of config.projects) await write(`cards/${project.id}-${t.name}.svg`, cardSvg(project, t));
 }
@@ -41,4 +41,4 @@ if (!portrait) {
 }
 
 await writeFile(resolve(root, "README.md"), readme(config));
-console.log(`Built ${portrait ? "hero, " : ""}pipeline, career, ${config.projects.length} cards (dark + light) and README.md.`);
+console.log(`Built ${portrait ? "hero, " : ""}graph, career, ${config.projects.length} cards (dark + light) and README.md.`);
