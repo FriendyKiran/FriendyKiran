@@ -174,8 +174,6 @@ ${term.clips}`;
 <text x="${PANEL.x + 18}" y="${PANEL.y + 26}" class="mono" font-size="11.5" fill="${t.muted}">latent_space.project(<tspan fill="${t.accent}">"${esc(p.username)}"</tspan>)</text>
 <text x="${PANEL.x + PANEL.w - 18}" y="${PANEL.y + 26}" text-anchor="end" class="mono" font-size="11" fill="${t.faint}">n=${portrait.cells.length} · dims=2</text>
 <g clip-path="url(#panel)">${portraitLayer(portrait, t)}</g>
-<g class="live"><circle cx="538" cy="52" r="5" fill="${t.green}"/></g>
-<text x="552" y="56.5" class="mono" font-size="12.5" fill="${t.green}">${esc(p.status)}</text>
 <text x="528" y="112" font-family="${SANS}" font-size="46" font-weight="700" fill="${t.text}" letter-spacing="-0.5">${esc(p.name)}</text>
 <text x="530" y="146" font-family="${SANS}" font-size="21" font-weight="600" fill="${t.accent}">${esc(p.headline)}</text>
 <text x="530" y="174" font-family="${SANS}" font-size="14.5" fill="${t.muted}">${esc(p.tagline)}</text>
